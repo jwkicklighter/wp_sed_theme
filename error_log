@@ -1,0 +1,1 @@
+[19-Jul-2015 06:49:11 America/Chicago] PHP Fatal error:  Call to undefined function get_header() in /home2/kkys7109/public_html/wp-content/themes/sed/404.php on line 8
