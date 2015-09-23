@@ -305,6 +305,11 @@ require get_template_directory() . '/inc/customizer.php';
 require get_template_directory() . '/inc/custom-header.php';
 
 /**
+ * Custom Shortcodes.
+ */
+require get_template_directory() . '/inc/shortcodes.php';
+
+/**
  * Load Jetpack compatibility file.
  */
 require get_template_directory() . '/inc/jetpack.php';
