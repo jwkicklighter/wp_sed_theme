@@ -68,73 +68,14 @@ function sela_setup() {
 		'default-color' => 'fafafa',
 	) ) );
 
-
-	// SED Custom Roles
-	add_role( 'pres', 'President' );
-	add_role( 'vp', 'Vice President' );
-	add_role( 'sec', 'Secretary/Treasurer' );
-	add_role( 'ml', 'Member at Large' );
-	add_role( 'gov', 'Governor' );
-
 }
 add_action( 'after_setup_theme', 'sela_setup' );
-
-function display_user_role( $user )
-{
-	$user_roles = $user->roles;
-	$user_role = array_shift($user_roles);
-
-	if ($user_role == 'pres') {
-		return 'President';
-	} elseif ($user_role == 'vp') {
-		return 'Vice President';
-	} elseif ($user_role == 'sec') {
-		return 'Secretary/Treasurer';
-	} elseif ($user_role == 'ml') {
-		return 'Member at Large';
-	} elseif ($user_role == 'gov') {
-		return 'Governor';
-	}
-}
-
 
 /**
  * Custom SED User Meta
  */
 
 remove_filter( 'pre_user_description' , 'wp_filter_kses' );
-
-
-add_action( 'show_user_profile', 'add_council_meta' );
-add_action( 'edit_user_profile', 'add_council_meta' );
-
-function add_council_meta( $user )
-{
-    ?>
-      <h3>Council Information</h3>
-
-      <table class="form-table">
-        <tr>
-          <th><label for="is_council">Is this user a member of the council? (1=yes, 0=no)</label></th>
-          <td><input type="text" name="is_council" value="<?php echo esc_attr(get_the_author_meta( 'is_council', $user->ID )); ?>" class="number" /></td>
-        </tr>
-        <tr>
-          <th><label for="council_order">Council Sort Order</label></th>
-          <td><input type="text" name="council_order" value="<?php echo esc_attr(get_the_author_meta( 'council_order', $user->ID )); ?>" class="number" /></td>
-        </tr>
-      </table>
-    <?php
-}
-
-add_action( 'personal_options_update', 'save_council_meta' );
-add_action( 'edit_user_profile_update', 'save_council_meta' );
-
-function save_council_meta( $user_id )
-{
-    update_user_meta( $user_id,'is_council', sanitize_text_field( $_POST['is_council'] ) );
-    update_user_meta( $user_id,'council_order', sanitize_text_field( $_POST['council_order'] ) );
-}
-
 
 /**
  * Returns the Google font stylesheet URL, if available.
